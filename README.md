@@ -42,6 +42,7 @@ dlassets.xboxlive.cn
 
 我们写了一个简易的脚本来快速完成地址筛选测速的结果。
 
+去Release页面下载最新的脚本。
 打开```./configs/cdn.list```把XBOX下载服务器的IP列表添加进去。这里我已经预先放好了，如果你找到了更好的列表，可以自行修改。
 
 在cmd下运行XboxSpeedTest.py，等待十分钟，优选测速完毕后会提示最佳服务器，并写入结果。
