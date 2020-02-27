@@ -50,11 +50,15 @@ dlassets.xboxlive.cn
 ```
 python XboxSpeedTest.py
 ```
-康康结果：
+## 康康结果：
 ```
 [LOG]All CDN Test complete. Have fun!
 [LOG]Your Best CDN is 203.69.138.26, 7388KB/s!
 ```
 
 结果 hosts_best_output.txt 对应hosts，dnsmasq_best_output.txt 对应dnsmasq，smartdns_best_output.txt对应smartdns，把以上结果复制到路由或者hosts中，重启xbox试试下载吧。
+
+## 引用：
+http://wap.a9vg.com/thread-5330577-1-1.html?t=1543674360 Xbox 下载更新停止完美解决方案
+https://bbs.a9vg.com/thread-5478226-1-1.html Xbox One 当前国内CDN状态分析
 
