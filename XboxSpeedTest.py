@@ -114,9 +114,9 @@ def generate_hosts():
         best_ip = best_ips[0][0]
         best_spd = best_ips[0][1]
         if (best_spd > 0):
-            bw.write("%s %s\r\n"%("assets1.xboxlive.com", best_ip))
-            bw.write("%s %s\r\n"%("assets2.xboxlive.com", best_ip))
-            bw.write("%s %s\r\n"%("dlassets.xboxlive.com", best_ip))
+            bw.write("%s %s\r\n"%(best_ip, "assets1.xboxlive.com"))
+            bw.write("%s %s\r\n"%(best_ip, "assets2.xboxlive.com"))
+            bw.write("%s %s\r\n"%(best_ip, "dlassets.xboxlive.com"))
     bw.close()
     pass
 
