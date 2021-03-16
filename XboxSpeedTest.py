@@ -7,7 +7,7 @@ import sys
 import StringIO as StringIO
 import codecs
 
-CURL_PATH = "bin/curl"
+CURL_PATH = "curl"
 CURL_MAX_TIME = 8
 CURL_RANGE = r"33543139328-33752035327"
 CURL_SPEED_TIME = 5
@@ -34,6 +34,8 @@ def subprocess_call(proc_name, argv):
     ret_code = 0
     try:
         process = subprocess.Popen("%s %s"%(proc_name , argv), shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        # IF LINUX, SET shell=TRUE:
+        # process = subprocess.Popen("%s %s"%(proc_name , argv), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         process.wait()
         output, unused_err = process.communicate()
         retcode = process.poll()
