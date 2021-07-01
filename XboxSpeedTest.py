@@ -1,13 +1,11 @@
 # -*- coding:utf-8 -*-
 #!/usr/bin/env python
 
-import codecs
-import os
 import subprocess
+import os
 import sys
-import traceback
-from io import StringIO
-
+import StringIO as StringIO
+import codecs
 
 CURL_PATH = "curl"
 CURL_MAX_TIME = 8
@@ -21,7 +19,7 @@ CDN_CONF_NAME = "configs/cdn.list"
 
 
 def createArgv(ip_addr):
-    sw = StringIO()
+    sw = StringIO.StringIO()
     sw.write(r"-s -o nul")
     sw.write(r" -m %d"%(CURL_MAX_TIME))
     sw.write(r" -r %s"%(CURL_RANGE))
@@ -33,19 +31,21 @@ def createArgv(ip_addr):
 
 def subprocess_call(proc_name, argv):
     # print("%s %s"%(proc_name, argv))
-    ret_code, ret_msg = 0, ""
+    ret_code = 0
     try:
         process = subprocess.Popen("%s %s"%(proc_name , argv), shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         # IF LINUX, SET shell=TRUE:
         # process = subprocess.Popen("%s %s"%(proc_name , argv), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         process.wait()
         output, unused_err = process.communicate()
-        ret_code = process.poll()
+        retcode = process.poll()
         ret_msg = output
-    except Exception as ex :
+    except Exception,ex :
         ret_code = 1
         ret_msg = "0"
-        traceback.print_exc(ex)
+        print(ex)
+        pass
+    result = ret_msg
     return (ret_code, ret_msg)
 
 ip_dicts = {}
@@ -65,7 +65,7 @@ def main():
     print("***************  Xbox CDN SpeedTest *****************")
     print("** Finding your best CDN for Xbox Game Downloads ****")
     urls = codecs.open(CDN_CONF_NAME, "rb", "utf-8").readlines()
-    for _,line in enumerate(urls):
+    for index,line in enumerate(urls):
         if ("." in line):
             line = trim_str(line)
             ip_dicts[line] = 0
@@ -78,7 +78,7 @@ def main():
         ret_x = subprocess_call(CURL_PATH, argv)
         spd_float = 0
         if (ret_x[0] == 0):
-            spd = trim_str(str(ret_x[1]))
+            spd = trim_str(ret_x[1])
             try:
                 spd_float = int(float(spd) / 1024.0)
             except:
