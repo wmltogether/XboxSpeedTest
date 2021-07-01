@@ -6,6 +6,7 @@ import os
 import sys
 import StringIO as StringIO
 import codecs
+import platform
 
 CURL_PATH = "curl"
 CURL_MAX_TIME = 8
@@ -17,6 +18,8 @@ CURL_WRITEOUT = "\"%{speed_download}\""
 
 CDN_CONF_NAME = "configs/cdn.list"
 
+def notWindows():
+    return platform.system().lower() != "windows"
 
 def createArgv(ip_addr):
     sw = StringIO.StringIO()
@@ -33,7 +36,7 @@ def subprocess_call(proc_name, argv):
     # print("%s %s"%(proc_name, argv))
     ret_code = 0
     try:
-        process = subprocess.Popen("%s %s"%(proc_name , argv), shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        process = subprocess.Popen("%s %s"%(proc_name , argv), shell=notWindows(), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         # IF LINUX, SET shell=TRUE:
         # process = subprocess.Popen("%s %s"%(proc_name , argv), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         process.wait()
